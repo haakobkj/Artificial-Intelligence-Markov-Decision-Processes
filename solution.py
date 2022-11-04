@@ -38,8 +38,6 @@ class Solver:
         self.new_policy = dict()
 
 
-
-
     # === Value Iteration ==============================================================================================
 
     def vi_initialise(self):
@@ -93,8 +91,6 @@ class Solver:
             prob_dict[(SPIN_LEFT, FORWARD, FORWARD)] = self.environment.drift_ccw_probs[0] * self.environment.double_move_probs[0]
             prob_dict[(SPIN_RIGHT, FORWARD, FORWARD)] =  self.environment.drift_ccw_probs[0] * self.environment.double_move_probs[0]
             prob_dict[(FORWARD,)] = 1 - sum(prob_dict.values())
-
-
         elif action == REVERSE:
             prob_dict[(REVERSE, REVERSE)] = self.environment.double_move_probs[1] * (1- self.environment.drift_cw_probs[1] - self.environment.drift_ccw_probs[1])
             prob_dict[(SPIN_LEFT, REVERSE)] = self.environment.drift_ccw_probs[1] * (1 - self.environment.double_move_probs[1])
@@ -102,10 +98,8 @@ class Solver:
             prob_dict[(SPIN_LEFT, REVERSE, REVERSE)] = self.environment.drift_ccw_probs[1] * self.environment.double_move_probs[1]
             prob_dict[(SPIN_RIGHT, REVERSE, REVERSE)] =  self.environment.drift_ccw_probs[1] * self.environment.double_move_probs[1]
             prob_dict[(REVERSE,)] = 1 - sum(prob_dict.values())
-
         elif action == SPIN_LEFT:
             prob_dict[(SPIN_LEFT,)] = 1
-        
         elif action == SPIN_RIGHT:
             prob_dict[(SPIN_RIGHT,)] = 1
         
@@ -225,8 +219,6 @@ class Solver:
             self.max_difference = max(diff)
 
 
-            # Nicholas Collins said that we were free to chosse our own epsilon (#https://edstem.org/au/courses/9482/discussion/1038637).
-            # I chose epsilon = 10 to maximize marks on gradescope.
 
             if self.max_difference < 10:
                 value_converged = True
